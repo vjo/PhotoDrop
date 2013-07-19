@@ -47,6 +47,7 @@ function handleFiles(files)
 
 	var reader = new FileReader();
 	reader.onloadend = handleReaderLoad;
+	reader.onprogress = handleReaderOnProgress;
 
 	reader.readAsDataURL(file);
 }
@@ -55,6 +56,16 @@ function handleReaderLoad(evt)
 {
 	var img = document.getElementById("preview");
 	img.src = evt.target.result;
+}
+
+function handleReaderOnProgress(evt)
+{
+	if(evt.lengthComputable)
+	{
+		var percentComplete = (evt.loaded / evt.total) * 100;
+		var progressBar = document.getElementById("progressbar");
+		progressBar.value = percentComplete;
+	}
 }
 
 /* optional triggers
