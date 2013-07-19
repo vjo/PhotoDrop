@@ -16,13 +16,17 @@
 $(document).ready(function (){
 
 	// your functions go here
+// Init drag and drop events
 var dropzone = document.getElementById("dropzone");
 dropzone.addEventListener("dragenter", noopHandler, false);
 dropzone.addEventListener("dragexit", noopHandler, false);
 dropzone.addEventListener("dragover", noopHandler, false);
 dropzone.addEventListener("drop", drop, false);
 
-function noopHandler(evt) {
+});
+
+function noopHandler(evt) 
+{
   evt.stopPropagation();
   evt.preventDefault();
 }
@@ -33,13 +37,25 @@ function drop(ev)
 	ev.preventDefault();
 	var files = ev.dataTransfer.files;
 	var count = files.length;
-	if(count &gt; 0)
-		
+	if(count > 0)
+		handleFiles(files);
 }
 
+function handleFiles(files) 
+{
+	var file = files[0];
 
-});
+	var reader = new FileReader();
+	reader.onloadend = handleReaderLoad;
 
+	reader.readAsDataURL(file);
+}
+
+function handleReaderLoad(evt)
+{
+	var img = document.getElementById("preview");
+	img.src = evt.target.result;
+}
 
 /* optional triggers
 
