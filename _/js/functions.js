@@ -15,18 +15,26 @@
 /* trigger when page is ready */
 $(document).ready(function (){
 
-	// your functions go here
-// Init drag and drop events
-var dropzone = document.getElementById("dropzone");
-dropzone.addEventListener("dragenter", noopHandler, false);
-dropzone.addEventListener("dragexit", noopHandler, false);
-dropzone.addEventListener("dragover", noopHandler, false);
-dropzone.addEventListener("drop", drop, false);
+    // Init drag and drop events
+    var dropzone = document.getElementById("dropzone");
+    dropzone.addEventListener("dragenter", noopHandler, false);
+    dropzone.addEventListener("dragexit", noopHandler, false);
+    dropzone.addEventListener("dragover", noopHandler, false);
+    dropzone.addEventListener("drop", drop, false);
 
+    $(document).on('click', '#preview', function() {
+        var img = this;
+        EXIF.getData(img, function() {
+            console.log(EXIF.pretty(this));
+            var make = EXIF.getTag(this, "Make"),
+                model = EXIF.getTag(this, "Model");
+            console.log("I was taken by a " + make + " " + model);
+        });
+    });
 initMap();
 });
 
-function noopHandler(evt) 
+function noopHandler(evt)
 {
   evt.stopPropagation();
   evt.preventDefault();
@@ -42,7 +50,7 @@ function drop(ev)
 		handleFiles(files);
 }
 
-function handleFiles(files) 
+function handleFiles(files)
 {
 	var file = files[0];
 
@@ -78,7 +86,7 @@ function initMap()
 	var map = L.map('map').setView([48.853, 2.35], 13);
 
 	L.tileLayer('http://{s}.tile.cloudmade.com/18130e5d2a24477dbdc6c1b915cb3e8e/997/256/{z}/{x}/{y}.png', {
-	    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery Â© <a href="http://cloudmade.com">CloudMade</a>',
+	    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
 	    maxZoom: 18
 	}).addTo(map);
 }
@@ -86,11 +94,11 @@ function initMap()
 /* optional triggers
 
 $(window).load(function() {
-	
+
 });
 
 $(window).resize(function() {
-	
+
 });
 
 */
