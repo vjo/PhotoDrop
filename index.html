@@ -38,8 +38,10 @@
 	-->
 
 	<!-- concatenate and minify for production -->
-	<link rel="stylesheet" href="_/css/reset.css" />
+	<!-- <link rel="stylesheet" href="_/css/reset.css" /> -->
 	<link rel="stylesheet" href="_/css/style.css" />
+	<!-- Bootstrap -->
+    <link href="_/css/bootstrap.css" rel="stylesheet" media="screen">
 
 	<!-- This is an un-minified, complete version of Modernizr.
 		 Before you move to production, you should generate a custom build that only has the detects you need. -->
@@ -69,9 +71,11 @@
 <div class="wrapper"><!-- not needed? up to you: http://camendesign.com/code/developpeurs_sans_frontieres -->
 
 	<header>
-
-		<h1>Get Photo Info</h1>
-
+		<div class="container">
+			<div class="page-header">
+				<h1>PhotoDrop</h1>
+			</div>
+		</div>
 		<!-- <nav>
 
 			<ol>
@@ -84,21 +88,23 @@
 
 	</header>
 
-	<div id="dropzone" class="zone">
-		<span>Drop file here...</span>
+	<div class="container">
+		<div id="dropzone" class="zone">
+			<!-- <span id="droplabel">Drop file here...</span> -->
+			<p id="droplabel" class="lead">Drop file here...</p>
+		</div>
+
+		<!-- <div class="progress progress-striped active">
+  			<div class="progressbar" value="50" style="width: 50px;"></div>
+		</div> -->
+
+		<img id="preview" src=""/>
+
 	</div>
-
-	<progress id="progressbar" value="0" min="0" max="100"></progress>
-
-	<img id="preview" src="http://lissot.info/images/photos/20.jpg"/>
-
-	<aside>
-
-	</aside>
 
 	<footer>
 
-		<p><small>&copy; Copyright FIP Hackathon 2013. All Rights Reserved.</small></p>
+		<p class="muted credit centrage">&copy; Copyright FIP Hackathon 2013. All Rights Reserved.</p>
 
 	</footer>
 
@@ -117,6 +123,7 @@
 <!-- this is where we put our custom functions -->
 <!-- don't forget to concatenate and minify if needed -->
 <script src="_/js/functions.js"></script>
+<script src="_/js/bootstrap.js"></script>
 
 <!-- Asynchronous google analytics; this is the official snippet.
 	 Replace UA-XXXXXX-XX with your site's ID and uncomment to enable.

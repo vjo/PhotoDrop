@@ -57,7 +57,7 @@ var EXIF = (function() {
         0x9214 : "SubjectArea",			// Location and area of main subject
         0x920A : "FocalLength",			// Focal length of the lens in mm
         0xA20B : "FlashEnergy",			// Strobe energy in BCPS
-        0xA20C : "SpatialFrequencyResponse",	// 
+        0xA20C : "SpatialFrequencyResponse",	//
         0xA20E : "FocalPlaneXResolution", 	// Number of pixels in width direction per FocalPlaneResolutionUnit
         0xA20F : "FocalPlaneYResolution", 	// Number of pixels in height direction per FocalPlaneResolutionUnit
         0xA210 : "FocalPlaneResolutionUnit", 	// Unit for measuring FocalPlaneXResolution and FocalPlaneYResolution
@@ -77,7 +77,7 @@ var EXIF = (function() {
         0xA408 : "Contrast",			// Direction of contrast processing applied by camera
         0xA409 : "Saturation", 			// Direction of saturation processing applied by camera
         0xA40A : "Sharpness",			// Direction of sharpness processing applied by camera
-        0xA40B : "DeviceSettingDescription",	// 
+        0xA40B : "DeviceSettingDescription",	//
         0xA40C : "SubjectDistanceRange",	// Distance to subject
 
         // other tags
@@ -294,10 +294,10 @@ var EXIF = (function() {
     };
 
     function addEvent(element, event, handler) {
-        if (element.addEventListener) { 
-            element.addEventListener(event, handler, false); 
-        } else if (element.attachEvent) { 
-            element.attachEvent("on" + event, handler); 
+        if (element.addEventListener) {
+            element.addEventListener(event, handler, false);
+        } else if (element.attachEvent) {
+            element.attachEvent("on" + event, handler);
         }
     }
 
@@ -346,20 +346,20 @@ var EXIF = (function() {
 
             marker = file.getByteAt(offset+1);
 
-            // we could implement handling for other markers here, 
+            // we could implement handling for other markers here,
             // but we're only looking for 0xFFE1 for EXIF data
 
             if (marker == 22400) {
                 if (debug) console.log("Found 0xFFE1 marker");
-                
+
                 return readEXIFData(file, offset + 4, file.getShortAt(offset+2, true)-2);
-                
+
                 // offset += 2 + file.getShortAt(offset+2, true);
 
             } else if (marker == 225) {
                 // 0xE1 = Application-specific 1 (for EXIF)
                 if (debug) console.log("Found 0xFFE1 marker");
-                
+
                 return readEXIFData(file, offset + 4, file.getShortAt(offset+2, true)-2);
 
             } else {
@@ -373,10 +373,10 @@ var EXIF = (function() {
 
     function readTags(file, tiffStart, dirStart, strings, bigEnd) {
         var entries = file.getShortAt(dirStart, bigEnd),
-            tags = {}, 
+            tags = {},
             entryOffset, tag,
             i;
-            
+
         for (i=0;i<entries;i++) {
             entryOffset = dirStart + i*12 + 2;
             tag = strings[file.getShortAt(entryOffset, bigEnd)];
@@ -526,23 +526,23 @@ var EXIF = (function() {
                     case "SceneCaptureType" :
                     case "SceneType" :
                     case "CustomRendered" :
-                    case "WhiteBalance" : 
-                    case "GainControl" : 
+                    case "WhiteBalance" :
+                    case "GainControl" :
                     case "Contrast" :
                     case "Saturation" :
-                    case "Sharpness" : 
+                    case "Sharpness" :
                     case "SubjectDistanceRange" :
                     case "FileSource" :
                         exifData[tag] = StringValues[tag][exifData[tag]];
                         break;
-        
+
                     case "ExifVersion" :
                     case "FlashpixVersion" :
                         exifData[tag] = String.fromCharCode(exifData[tag][0], exifData[tag][1], exifData[tag][2], exifData[tag][3]);
                         break;
-        
-                    case "ComponentsConfiguration" : 
-                        exifData[tag] = 
+
+                    case "ComponentsConfiguration" :
+                        exifData[tag] =
                             StringValues.Components[exifData[tag][0]]
                             + StringValues.Components[exifData[tag][1]]
                             + StringValues.Components[exifData[tag][2]]
@@ -557,10 +557,10 @@ var EXIF = (function() {
             gpsData = readTags(file, tiffOffset, tiffOffset + tags.GPSInfoIFDPointer, GPSTags, bigEnd);
             for (tag in gpsData) {
                 switch (tag) {
-                    case "GPSVersionID" : 
-                        gpsData[tag] = gpsData[tag][0] 
-                            + "." + gpsData[tag][1] 
-                            + "." + gpsData[tag][2] 
+                    case "GPSVersionID" :
+                        gpsData[tag] = gpsData[tag][0]
+                            + "." + gpsData[tag][1]
+                            + "." + gpsData[tag][2]
                             + "." + gpsData[tag][3];
                         break;
                 }
@@ -591,7 +591,7 @@ var EXIF = (function() {
 
     function getAllTags(img) {
         if (!imageHasData(img)) return {};
-        var a, 
+        var a,
             data = img.exifdata,
             tags = {};
         for (a in data) {
@@ -627,14 +627,14 @@ var EXIF = (function() {
         return findEXIFinJPEG(file);
     }
 
-   
+
     return {
         readFromBinaryFile : readFromBinaryFile,
         pretty : pretty,
         getTag : getTag,
         getAllTags : getAllTags,
         getData : getData,
-        
+
         Tags : ExifTags,
         TiffTags : TiffTags,
         GPSTags : GPSTags,

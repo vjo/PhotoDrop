@@ -22,27 +22,15 @@ $(document).ready(function (){
     dropzone.addEventListener("dragover", noopHandler, false);
     dropzone.addEventListener("drop", drop, false);
 
-document.getElementById("preview").onclick = function() {
-console.log(this);
-    EXIF.getData(this, function() {
-        var make = EXIF.getTag(this, "Make"),
-            model = EXIF.getTag(this, "Model");
-        console.log("I was taken by a " + make + " " + model);
-        alert("I was taken by a " + make + " " + model);
+    $(document).on('click', '#preview', function() {
+        var img = this;
+        EXIF.getData(img, function() {
+            console.log(EXIF.pretty(this));
+            var make = EXIF.getTag(this, "Make"),
+                model = EXIF.getTag(this, "Model");
+            console.log("I was taken by a " + make + " " + model);
+        });
     });
-}
-    //$(document).on('click', '#preview', function() {
-        //console.log('click');
-        //var img = this;
-//console.log(img);
-        //EXIF.getData(img, function() {
-//console.log(img);
-            //console.log(EXIF.pretty(img));
-            //var make = EXIF.getTag(img, "Make"),
-                //model = EXIF.getTag(img, "Model");
-            //console.log("I was taken by a " + make + " " + model);
-        //});
-    //});
 });
 
 function noopHandler(evt)
