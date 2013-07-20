@@ -31,7 +31,8 @@ $(document).ready(function (){
             console.log("I was taken by a " + make + " " + model);
         });
     });
-initMap();
+    
+	initMap();
 });
 
 function noopHandler(evt)
