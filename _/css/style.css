@@ -18,6 +18,8 @@ div.zone {
 	top: 45%;
 }
 
+#map { height: 380px; margin-top: 10px;}
+
 html{height: 100%;}
 body{height: 100%;  margin: 0; padding: 0;}
 div.wrapper{height: 100%;}

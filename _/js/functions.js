@@ -23,6 +23,7 @@ dropzone.addEventListener("dragexit", noopHandler, false);
 dropzone.addEventListener("dragover", noopHandler, false);
 dropzone.addEventListener("drop", drop, false);
 
+initMap();
 });
 
 function noopHandler(evt) 
@@ -47,7 +48,7 @@ function handleFiles(files)
 
 	var reader = new FileReader();
 	reader.onloadend = handleReaderLoad;
-	reader.onprogress = handleReaderOnProgress;
+	// reader.onprogress = handleReaderOnProgress;
 
 	reader.readAsDataURL(file);
 }
@@ -56,6 +57,10 @@ function handleReaderLoad(evt)
 {
 	var img = document.getElementById("preview");
 	img.src = evt.target.result;
+	var container = document.getElementById("dropzone");
+	container.hidden = true;
+	var divmap = document.getElementById("map");
+	divmap.hidden = false;
 }
 
 function handleReaderOnProgress(evt)
@@ -66,6 +71,16 @@ function handleReaderOnProgress(evt)
 		var progressBar = document.getElementById("progressbar");
 		progressBar.value = percentComplete;
 	}
+}
+
+function initMap()
+{
+	var map = L.map('map').setView([48.853, 2.35], 13);
+
+	L.tileLayer('http://{s}.tile.cloudmade.com/18130e5d2a24477dbdc6c1b915cb3e8e/997/256/{z}/{x}/{y}.png', {
+	    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+	    maxZoom: 18
+	}).addTo(map);
 }
 
 /* optional triggers

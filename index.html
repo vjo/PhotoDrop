@@ -7,16 +7,16 @@
 <!--[if gt IE 9]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <!-- the "no-js" class is for Modernizr. --> 
 
-<head id="www-getphotoinfo-com" data-template-set="html5-reset">
+<head id="www-photodrop-com" data-template-set="html5-reset">
 
 	<meta charset="utf-8">
 	
 	<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	
-	<title>Get Photo Info</title>
+	<title>PhotoDrop</title>
 	
-	<meta name="title" content="Get Photo Info" />
+	<meta name="title" content="PhotoDrop" />
 	<meta name="description" content="" />
 	<meta name="author" content="" />
 	<!-- Google will often use this as its description of your page/site. Make it good. -->
@@ -40,6 +40,8 @@
 	<!-- concatenate and minify for production -->
 	<!-- <link rel="stylesheet" href="_/css/reset.css" /> -->
 	<link rel="stylesheet" href="_/css/style.css" />
+	<!-- leaflet -->
+	<link rel="stylesheet" href="_/css/leaflet.css" />
 	<!-- Bootstrap -->
     <link href="_/css/bootstrap.css" rel="stylesheet" media="screen">
 	
@@ -90,7 +92,7 @@
 	
 	</header>
 	
-	<div class="container">
+	<div id="divcontainer" class="container">
 		<div id="dropzone" class="zone">
 			<!-- <span id="droplabel">Drop file here...</span> -->
 			<p id="droplabel" class="lead">Drop file here...</p>
@@ -102,6 +104,7 @@
 
 		<img id="preview" src=""/>
 
+		<div id="map" hidden="true"></div>
 	</div>
 
 	<footer>
@@ -124,6 +127,7 @@
 <!-- don't forget to concatenate and minify if needed -->
 <script src="_/js/functions.js"></script>
 <script src="_/js/bootstrap.js"></script>
+<script src="_/js/leaflet.js"></script>
 
 <!-- Asynchronous google analytics; this is the official snippet.
 	 Replace UA-XXXXXX-XX with your site's ID and uncomment to enable.
