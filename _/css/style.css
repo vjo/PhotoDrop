@@ -9,11 +9,13 @@ div.zone {
     height: 500px;
     border-radius: 10px;
     box-shadow: 1px 1px 12px #555;
+    text-align: center;
 }
 
 #droplabel {
+	text-align: center;
 	position: relative;
-	top: 50%;
+	top: 45%;
 }
 
 html{height: 100%;}
